@@ -29,7 +29,8 @@ korean_stopwords = set(["은", "는", "이", "가", "를", "에", "의", "도", 
                         "말했다", "않고", "않는", "않음", "않는다", "않는다고", "않는다는", "않는다며",
                         "귀하", "되다", "되어다", "되어", "되었다", "되었으며", "되었고", "되었는데",
                         "통해", "이라고", "이라는", "이라며", "이라면", "이라서", "이라", "이며", "이고",
-                        "통한", "참가", "신청서"])
+                        "통한", "참가", "신청서", 
+                        "사업", "내용", "지원", "기업", "사업자", "지역", "사업비", "사업계획서", "사업목적"])
 
 # 단어 변환 딕셔너리 (동의어 통합)
 word_replacements = {
@@ -144,7 +145,7 @@ def save_bigram_graph(bigram_list, output_file):
             partition[node] = partition[node] % 5  # 최대 5개로 제한
 
     # ✅ 색상 설정 (클러스터별로 구분)
-    cluster_colors = ["red", "blue", "green", "purple", "orange"]
+    cluster_colors = ["#FA7070", "#FFA725", "#FFF5E4", "#C1D8C3", "#6A9C89"]
     node_colors = [cluster_colors[partition[node] % len(cluster_colors)] for node in bigram_graph.nodes()]
 
     # ✅ 노드 위치 설정
@@ -179,7 +180,7 @@ def save_bigram_graph(bigram_list, output_file):
 
     # ✅ 한글 폰트 적용하여 라벨 추가
     labels = {node: node for node in bigram_graph.nodes()}
-    nx.draw_networkx_labels(bigram_graph, pos, labels, font_family="AppleGothic", font_size=10)
+    nx.draw_networkx_labels(bigram_graph, pos, labels, font_family="AppleGothic", font_size=8)
 
     # ✅ 이미지로 저장
     plt.savefig(output_file, format="png", dpi=300)
